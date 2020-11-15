@@ -26,6 +26,7 @@ Expectations:
   - MUST close when I click a close button
   - MUST indicate clearly how to close it, often with a X in the top right, and/or a [cancel] button
   - MUST close when I press ESC
+  - SHOULD NOT close when clicking outside of it / common anti-pattern
 - Dialogs MUST be modal, otherwise it is simply an Overlay.
 - The dialog MUST trap focus; it has it's own focus land.
   - MUST focus first focusable element when opened
@@ -62,3 +63,4 @@ GitHub tends to use the `<details>` element in many surprising ways, and has a v
 
 This has an added benefit of working (mostly) without javascript as the content can be styled as a dialog, allowing progressive enhancement.
 
+The trade off is that extra boilerplate must be added around the dialog, and that it must live where its button is. In the end, it seems worth it as long as the tradeoffs are not prohibitively complex.
