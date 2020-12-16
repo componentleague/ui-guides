@@ -1,3 +1,5 @@
+# State
+
 In the front-end state, or context, is the data reflecting the busines objects on the server.
 
 ## Authority
