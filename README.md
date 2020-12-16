@@ -1,5 +1,4 @@
-# ui-guides
-Guides on UI Topics
+# Guides on UI Topics
 
 - [Dialogs](./dialogs.md)
 - [State](./state.md)
