@@ -62,3 +62,33 @@ The only gotcha is: changing the property is often changing an object back to it
 detect a change in the property and will therefore not do anything. There are two ways to solve this: One, if the owning component knows 
 that the child component is is a LitElement, they can call the triggerUpdate() function to force the update. The other is to set the 
 property to `null` and then back to the component, this will ensure the change propagates. 
+
+## Notes
+State is difficult. We need to track our data from the server and to the client, and that gets real messy. Here are some points:
+
+- There's a difference between page-level state, single component state, and transient state:
+  - Page-level are the business objects that represent whats happening on that page, or often they are representing that specific url.
+  - Single component state is state that only one component cares about, it's managed entirely by it.
+  - Transient state is UI-specific state that the user wouldn't expect to be saved when they came back to the page, like the open status of a drawer.
+- Transient state should not be in our state-management at all. Just gunks up the works.
+- Single component state also doesn't need to be managed because it's just for the one component.
+- Page-level state needs to be managed.
+- Managed state needs to have well defined schemas on both the server and client side.
+- Managed state can come from three places:
+  - An API call.
+  - A library call, like Firebase.
+  - Bundled into the HTML.
+- State updates, it's a moving target
+- State can be updated by the ui or an API / Library / Other Tab.
+- State can be subscribed to locally, either with an Observer Pattern or an Pub Sub Pattern.
+- State can be subscribed to across tabs, with some mechanism of update.
+- State can be subscribed to across the network, some API or library connects us to a service that triggers updates of the state.
+- State needs to be updated in some time frame:
+  - Never
+  - Whenever the site reloads, no big deal
+  - When the page reloads, or the app revisits the url
+  - Every few minutes
+  - In realtime, or close to it
+- State can be stored locally, partially or whole.
+- State can sync across the network, if using libraries for CRDT (Conflict-free Replicated Data Type) or OT (Operational Transformation).
+- Managing components should update state directly on child-components, rather than having children manage subscription themselves.
